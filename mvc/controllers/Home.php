@@ -5,9 +5,7 @@
 class Home extends Controller{
 
     function index(){        
-        if ($_SESSION['user'] != "admin") {
-            header("Location: /sqli/home/login");
-        }
+        $this->checkIsAdmin();
         // Call Views
         $this->view("home", [
             'user' => $_SESSION['user']
@@ -27,11 +25,14 @@ class Home extends Controller{
             if ($row[1] == "admin") {
                 $_SESSION['user'] = "admin";
                 header("Location: /sqli/home");
-                
             }
-    
-        }
-        
+            $this->index();
+        }   
+    }
+
+    function logout() {
+        unset($_SESSION['user']);
+        $this->index();
     }
 }
 ?>

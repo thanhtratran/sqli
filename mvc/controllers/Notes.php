@@ -3,40 +3,31 @@
 // http://localhost/live/Home/Show/1/2
 
 class Notes extends Controller{
-
+    
     function index(){        
-        if ($_SESSION['user'] != "admin") {
-            header("Location: /sqli/home/login");
-        }
+        $this->checkIsAdmin();
         // Call Models
         $noteModel = $this->model("NotesModel");
-        $row = mysqli_fetch_array($noteModel->getAllNotes(), MYSQLI_NUM);
-        
+
         // Call Views
         $this->view("notes", [
             'user' => $_SESSION['user'],
-            'row' => $row
+            'result' => $noteModel->getAllNotes(),
         ]);
     }
 
-    function login() {
+    function search() {
+        $this->checkIsAdmin();
         // Call Models
-        $userModel = $this->model("UserModel");
-        // Call Views
-        if ($_SERVER['REQUEST_METHOD'] == "GET") {
-            $this->view("login", []);
-
-        } else if ($_SERVER['REQUEST_METHOD'] == "POST")  {
-            $result = $userModel->getUser($_POST['username'], $_POST['password']);
-            $row = mysqli_fetch_array($result, MYSQLI_NUM);
-            if ($row[1] == "admin") {
-                $_SESSION['user'] = "admin";
-                header("Location: /sqli/home");
-                
-            }
-    
+        $noteModel = $this->model("NotesModel");
+        if (!$noteModel->searchNote($_GET['search'])) {
+            echo mysqli_error($noteModel->con);
         }
-        
+        // Call Views
+        $this->view("notes", [
+            'user' => $_SESSION['user'],
+            'result' => $noteModel->searchNote($_GET['search'])
+        ]);
     }
 }
 ?>

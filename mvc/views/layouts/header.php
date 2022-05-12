@@ -10,15 +10,26 @@
     <meta name="author" content="">
 
     <title>SB Admin 2 - Dashboard</title>
-
+    <?php
+        function UrlProcess(){
+            if( isset($_GET["url"]) ){
+                return explode("/", filter_var(trim($_GET["url"], "/")));
+            }
+        }
+        $path = '';
+        if (!is_null(UrlProcess())) {
+            if (count(UrlProcess()) > 1) {
+                $path = str_repeat("../", (count(UrlProcess()) - 2)) . '.';
+            }
+        }
+    ?>
     <!-- Custom fonts for this template-->
-    <link href="./mvc/assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="<?php echo $path ?>./mvc/assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
-
     <!-- Custom styles for this template-->
-    <link href="./mvc/assets/css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="<?php echo $path ?>./mvc/assets/css/sb-admin-2.min.css" rel="stylesheet">
 
 </head>
 
@@ -31,7 +42,7 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/sqli">
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
@@ -43,7 +54,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
-                <a class="nav-link" href="index.html">
+                <a class="nav-link" href="/sqli">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
@@ -95,15 +106,13 @@
                     </button>
 
                     <!-- Topbar Search -->
-                    <form
+                    <form action="/sqli/notes/search"
                         class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                         <div class="input-group">
-                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
+                            <input type="text" name="search" class="form-control bg-light border-0 small" placeholder="Search note"
                                 aria-label="Search" aria-describedby="basic-addon2">
                             <div class="input-group-append">
-                                <button class="btn btn-primary" type="button">
-                                    <i class="fas fa-search fa-sm"></i>
-                                </button>
+                                <input class="btn btn-primary" type="submit" value = "Search">
                             </div>
                         </div>
                     </form>
@@ -202,7 +211,7 @@
                                 </h6>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
                                     <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src="./mvc/assets/img/undraw_profile_1.svg"
+                                        <img class="rounded-circle" src="<?php echo $path ?>./mvc/assets/img/undraw_profile_1.svg"
                                             alt="...">
                                         <div class="status-indicator bg-success"></div>
                                     </div>
@@ -214,7 +223,7 @@
                                 </a>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
                                     <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src="./mvc/assets/img/undraw_profile_2.svg"
+                                        <img class="rounded-circle" src="<?php echo $path ?>./mvc/assets/img/undraw_profile_2.svg"
                                             alt="...">
                                         <div class="status-indicator"></div>
                                     </div>
@@ -226,7 +235,7 @@
                                 </a>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
                                     <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src="./mvc/assets/img/undraw_profile_3.svg"
+                                        <img class="rounded-circle" src="<?php echo $path ?>./mvc/assets/img/undraw_profile_3.svg"
                                             alt="...">
                                         <div class="status-indicator bg-warning"></div>
                                     </div>
@@ -264,7 +273,7 @@
                                     ?>
                                 </span>
                                 <img class="img-profile rounded-circle"
-                                    src="./mvc/assets/img/undraw_profile.svg">
+                                    src="<?php echo $path ?>./mvc/assets/img/undraw_profile.svg">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"

@@ -10,5 +10,10 @@ class NotesModel extends DB{
         return mysqli_query($this->con, $qr);
     }
 
+    public function searchNote($str) {
+        $qr = "SELECT * FROM notes where tieude like '%{$str}%'  or noidung like '%{$str}%'";
+        return mysqli_query($this->con, $qr);
+    }
+
 }
 ?>

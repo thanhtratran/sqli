@@ -41,12 +41,7 @@
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
                                     </div>
-                                    <h1>
-                                        <?php
-                                            
-                                            echo "gello";
-                                        ?>
-                                    </h1>
+                                    
                                     <form class="user" action="/sqli/home/login" method="POST">
                                         <div class="form-group">
                                             <input name="username" type="text" class="form-control form-control-user"
@@ -94,14 +89,14 @@
     </div>
 
     <!-- Bootstrap core JavaScript-->
-    <script src="../mvc/assets/vendor/jquery/jquery.min.js"></script>
-    <script src="../mvc/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="./mvc/assets/vendor/jquery/jquery.min.js"></script>
+    <script src="./mvc/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Core plugin JavaScript-->
-    <script src="../mvc/assets/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="./mvc/assets/vendor/jquery-easing/jquery.easing.min.js"></script>
 
     <!-- Custom scripts for all pages-->
-    <script src="../mvc/assets/js/sb-admin-2.min.js"></script>
+    <script src="./mvc/assets/js/sb-admin-2.min.js"></script>
 
 </body>
 
